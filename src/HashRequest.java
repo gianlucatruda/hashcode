@@ -1,11 +1,9 @@
-import javax.xml.ws.Endpoint;
-
-public class Request {
-    public Endpoint source;
-    public Video vid;
+public class HashRequest {
+    public HashEndpoint source;
+    public HashVideo vid;
     public int numRequests;
 
-    public Request(Endpoint s, Video v, int req) {
+    public HashRequest(HashEndpoint s, HashVideo v, int req) {
         this.source = s;
         this.vid = v;
         this.numRequests = req;
@@ -15,11 +13,11 @@ public class Request {
         return numRequests;
     }
 
-    public Endpoint getSource() {
+    public HashEndpoint getSource() {
         return source;
     }
 
-    public Video getVid() {
+    public HashVideo getVid() {
         return vid;
     }
 }
