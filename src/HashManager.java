@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HashManager {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("hello world.");
 
         String INFILE = "me_at_the_zoo.in";
@@ -14,8 +15,12 @@ public class HashManager {
         ArrayList<HashVideo> videos;
 
         // Read in from input file.
+
         HashInputter inputter = new HashInputter(INFILE);
-        //some code to update the arraylists.
+        caches = inputter.caches;
+        endpoints = inputter.endpoints;
+        requests = inputter.requests;
+        videos = inputter.videos;
 
         // Optimise caches.
         HashOptimiser optimiser = new HashOptimiser(caches, requests, videos, endpoints);

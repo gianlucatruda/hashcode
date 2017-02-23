@@ -1,6 +1,6 @@
-import javax.xml.ws.Endpoint;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HashInputter {
@@ -14,13 +14,12 @@ public class HashInputter {
     int cache_capacity;
     int endpointsProcessed = 0;
     int currentCache = 0;
+    boolean isComplete = false;
 
     ArrayList<HashVideo> videos = new ArrayList<>(num_videos);
     ArrayList<HashCache> caches = new ArrayList<>(num_caches);
     ArrayList<HashRequest> requests = new ArrayList<>(num_requests);
     ArrayList<HashEndpoint> endpoints = new ArrayList<>(num_endpoints);
-
-
 
     public HashInputter(String textfile){
         this.textfile = textfile;
@@ -80,11 +79,14 @@ public class HashInputter {
                 requests.add(re);
             }
 
+            isComplete = true;
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+
 
 }
 
