@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class HashManager {
     public static void main(String[] args) throws IOException {
-        System.out.println("hello world.");
+        System.out.println("Processing...");
 
         String INFILE = "data/me_at_the_zoo.in";
         String OUTFILE = "data/me_at_the_zoo.out";
@@ -28,6 +28,8 @@ public class HashManager {
 
         // Generate output.
         HashOutputter outputter = new HashOutputter(caches, OUTFILE);
+
+        System.out.println("Complete!");
 
 
     }
