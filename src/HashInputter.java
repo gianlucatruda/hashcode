@@ -42,7 +42,7 @@ public class HashInputter {
             line = scanner.nextLine();
             lineArr = line.split(" ");
             for (int i=0; i<lineArr.length; i++){
-                HashVideo video = new HashVideo(i, lineArr[i]);
+                HashVideo video = new HashVideo(i, Integer.valueOf(lineArr[i]));
                 videos.add(video);
             }
 
@@ -61,7 +61,7 @@ public class HashInputter {
                 for (int j=0; j<numCachesForEndpoint;j++){
                     line = scanner.nextLine();
                     lineArr = line.split(" ");
-                    endpointsCaches.add(caches.get(lineArr[0]));
+                    endpointsCaches.add(caches.get(Integer.valueOf(lineArr[0])));
                     latencies.add(lineArr[1]);
                 }
                 HashEndpoint ed = new HashEndpoint(latency,endpointsCaches,latencies);
@@ -72,9 +72,9 @@ public class HashInputter {
             for (int i=0; i<num_requests; i++){
                 line = scanner.nextLine();
                 lineArr = line.split(" ");
-                int vidnum = lineArr[0];
-                int endnum = lineArr[1];
-                int numberofrequests = lineArr[2];
+                int vidnum = Integer.valueOf(lineArr[0]);
+                int endnum = Integer.valueOf(lineArr[1]);
+                int numberofrequests = Integer.valueOf(lineArr[2]);
                 HashRequest re = new HashRequest(endpoints.get(endnum),videos.get(vidnum),numberofrequests);
                 requests.add(re);
             }
