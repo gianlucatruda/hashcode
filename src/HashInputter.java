@@ -82,7 +82,7 @@ public class Inputter {
                 HashRequest re = new HashRequest(endpoints.get(endnum),videos.get(vidnum),numberofrequests);
                 requests.add(re);
             }
-            
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
