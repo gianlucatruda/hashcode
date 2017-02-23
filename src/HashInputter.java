@@ -3,10 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/**
- * Created by Brigitte on 2017/02/23.
- */
-public class Inputter {
+public class HashInputter {
     // Reader for hashcode problem
 
     String textfile;
@@ -25,7 +22,7 @@ public class Inputter {
 
 
 
-    public Inputter(String textfile){
+    public HashInputter(String textfile){
         this.textfile = textfile;
 
         try {
