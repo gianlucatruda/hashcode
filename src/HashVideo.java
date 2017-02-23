@@ -1,8 +1,8 @@
-public class Video {
+public class HashVideo {
     public int size; //Size of video in MB.
     public int ID; // The ID of the video.
 
-    public Video(int id, int s) { // s is the size passed in at construction.
+    public HashVideo(int id, int s) { // s is the size passed in at construction.
         this.ID = id;
         this.size = s;
     }
