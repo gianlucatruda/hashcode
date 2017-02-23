@@ -18,14 +18,11 @@ public class Inputter {
     int endpointsProcessed = 0;
     int currentCache = 0;
 
-    Video[] videos = new Video[num_videos];
-    Cache[] caches = new Cache[num_caches];
-    Request[] requests = new Request[num_requests];
-    Endpoint[] endpoints = new Endpoint[num_endpoints];
+    ArrayList<HashVideo> videos = new ArrayList<>(num_videos);
+    ArrayList<HashCache> caches = new ArrayList<>(num_caches);
+    ArrayList<HashRequest> requests = new ArrayList<>(num_requests);
+    ArrayList<HashEndpoint> endpoints = new ArrayList<>(num_endpoints);
 
-    boolean initialLine = false;
-    boolean videoLine = false;
-    boolean endpointSegment = false;
 
 
     public Inputter(String textfile){
@@ -49,15 +46,14 @@ public class Inputter {
             line = scanner.nextLine();
             lineArr = line.split(" ");
             for (int i=0; i<lineArr.length; i++){
-                Video video = new Video(i, lineArr[i]);
-                videos[i] = video;
+                HashVideo video = new HashVideo(i, lineArr[i]);
+                videos.add(video);
             }
 
             // creates the caches
             for (int i=0; i<num_caches;i++){
-                caches[i] = new Cache(cache_capacity);
+                caches.add(new HashCache(i, cache_capacity));
             }
-
             // process the endpoint line and then the corresponding cache lines
             for (int i=0; i<num_endpoints; i++){
                 line = scanner.nextLine();
@@ -69,50 +65,24 @@ public class Inputter {
                 for (int j=0; j<numCachesForEndpoint;j++){
                     line = scanner.nextLine();
                     lineArr = line.split(" ");
-
+                    endpointsCaches.add(caches.get(lineArr[0]));
+                    latencies.add(lineArr[1]);
                 }
-                Endpoint ed = new Endpoint();
+                HashEndpoint ed = new HashEndpoint(latency,endpointsCaches,latencies);
+                endpoints.add(ed);
             }
 
-
-            /*
-                Scanner lineScanner = new Scanner(line);
-                lineScanner.useDelimiter(" ");
-                */
-
-                if (!initialLine && !videoLine) {
-                    // gets first line in format of "V E R C X"
-                    num_videos = Integer.parseInt(lineScanner.next());
-                    num_endpoints = Integer.parseInt(lineScanner.next());
-                    num_requests = Integer.parseInt(lineScanner.next());
-                    num_caches = Integer.parseInt(lineScanner.next());
-                    cache_capacity = Integer.parseInt(lineScanner.next());
-                    initialLine =  true;
-
-                    //makes empty caches
-                    for (int i=0; i<num_caches;i++){
-                        caches[i] = new Cache(cache_capacity);
-                    }
-
-                } else if (initialLine && !videoLine && !endpointSegment){
-                    // gets second line in format of "s1 s2 s3 s4..."
-                    // each number represents the size of the video
-                    for (int i=0;i<num_videos;i++){
-                        Video video = new Video(i, lineScanner.nextInt());
-                        videos[i] = video;
-                    }
-                    videoLine=true;
-                }
-                else if (initialLine && videoLine && !endpointSegment){
-                    // logics to get to endpoint processing
-                    if (endpointsProcessed < num_endpoints && currentCache==0){
-
-                    }
-                }
-
-
-
-
+            // process the requests with format "Rv Re Rn"
+            for (int i=0; i<num_requests; i++){
+                line = scanner.nextLine();
+                lineArr = line.split(" ");
+                int vidnum = lineArr[0];
+                int endnum = lineArr[1];
+                int numberofrequests = lineArr[2];
+                HashRequest re = new HashRequest(endpoints.get(endnum),videos.get(vidnum),numberofrequests);
+                requests.add(re);
+            }
+            
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
