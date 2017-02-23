@@ -17,7 +17,7 @@ public class HashOptimiser {
         for (int i=0; i<req.size();i++){
             if (req.get(i).getNumRequests()>average){
                 if ((cach.get(currentCache).size - cach.get(currentCache).fullness) > req.get(i).getVid().getSize() ){
-                    cach.get(currentCache)
+                    cach.get(currentCache);
                 }
             }
         }
