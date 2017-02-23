@@ -18,7 +18,7 @@ public class HashManager {
         //some code to update the arraylists.
 
         // Optimise caches.
-        HashOptimiser optimiser = new HashOptimiser();
+        HashOptimiser optimiser = new HashOptimiser(caches, requests, videos, endpoints);
         //Some code to call optimiser.
 
         // Generate output.
