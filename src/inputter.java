@@ -64,7 +64,8 @@ public class Inputter {
                 lineArr = line.split(" ");
                 int latency = Integer.parseInt(lineArr[0]);
                 int numCachesForEndpoint = Integer.parseInt(lineArr[1]);
-                Cache[] endpointsCaches = new Cache[numCachesForEndpoint];
+                ArrayList endpointsCaches = new ArrayList(numCachesForEndpoint);
+                ArrayList latencies = new ArrayList(numCachesForEndpoint);
                 for (int j=0; j<numCachesForEndpoint;j++){
                     line = scanner.nextLine();
                     lineArr = line.split(" ");
