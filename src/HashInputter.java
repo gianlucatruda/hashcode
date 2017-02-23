@@ -54,7 +54,7 @@ public class HashInputter {
             for (int i=0; i<num_endpoints; i++){
                 line = scanner.nextLine();
                 lineArr = line.split(" ");
-                int latency = Integer.parseInt(lineArr[0]);
+                int latency = Integer.valueOf(lineArr[0]);
                 int numCachesForEndpoint = Integer.parseInt(lineArr[1]);
                 ArrayList endpointsCaches = new ArrayList(numCachesForEndpoint);
                 ArrayList latencies = new ArrayList(numCachesForEndpoint);
@@ -62,7 +62,7 @@ public class HashInputter {
                     line = scanner.nextLine();
                     lineArr = line.split(" ");
                     endpointsCaches.add(caches.get(Integer.valueOf(lineArr[0])));
-                    latencies.add(lineArr[1]);
+                    latencies.add(Integer.valueOf(lineArr[1]));
                 }
                 HashEndpoint ed = new HashEndpoint(latency,endpointsCaches,latencies);
                 endpoints.add(ed);

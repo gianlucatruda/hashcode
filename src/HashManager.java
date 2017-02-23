@@ -5,8 +5,8 @@ public class HashManager {
     public static void main(String[] args) throws IOException {
         System.out.println("hello world.");
 
-        String INFILE = "me_at_the_zoo.in";
-        String OUTFILE = "me_at_the_zoo.out";
+        String INFILE = "data/me_at_the_zoo.in";
+        String OUTFILE = "data/me_at_the_zoo.out";
 
         // Create ArrayLists.
         ArrayList<HashCache> caches;
