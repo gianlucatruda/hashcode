@@ -24,13 +24,7 @@ public class HashManager {
 
         // Optimise caches.
         HashOptimiser optimiser = new HashOptimiser(caches, requests, videos, endpoints);
-        //Some code to call optimiser.
-
-        for(int i=0; i<videos.size();i++) {
-            for (int j = 0; j < caches.size(); j++) {
-                caches.get(j).videos.add(videos.get(i));
-            }
-        }
+		caches = optimiser.run();
 
         // Generate output.
         HashOutputter outputter = new HashOutputter(caches, OUTFILE);

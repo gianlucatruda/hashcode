@@ -4,19 +4,20 @@ public class HashCache {
     public int size; // The size of the cache in MB.
     public int ID;
     public ArrayList<HashVideo> videos = new ArrayList<>();
-    public int fullness;
+    public int remaining;
 
     public HashCache(int id, int s) {
         this.ID = id;
         this.size = s;
-        this.fullness = 0;
+        this.remaining = this.size;
     }
 
-    public void setVideos(ArrayList<HashVideo> vids) {
-        for (HashVideo v : vids) {
-            videos.add(v);
-        }
-    }
+	public void addVideo(HashVideo v) {
+		videos.add(v);
+		remaining -= v.getSize();
+	}
+
+	public int getRemaining() { return remaining; }
 
     public ArrayList<HashVideo> getVideos() {
         return videos;

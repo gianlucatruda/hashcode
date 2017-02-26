@@ -1,28 +1,37 @@
 import java.util.ArrayList;
 
 public class HashOptimiser {
+	ArrayList<HashCache> caches;
+	ArrayList<HashRequest> requests;
+	ArrayList<HashVideo> videos;
+	ArrayList<HashEndpoint> endpoints;
 
-    public HashOptimiser(   ArrayList<HashCache> cach,
-                            ArrayList<HashRequest> req,
-                            ArrayList<HashVideo> vid,
-                            ArrayList<HashEndpoint> ends
-                        ){
-        int currentCache = 0;
-        int total =0;
-        for (int i=0; i<req.size();i++){
-            total += req.get(i).getNumRequests();
-        }
-        int average = total/req.size();
+    public HashOptimiser (
+		ArrayList<HashCache> cach,
+		ArrayList<HashRequest> req,
+		ArrayList<HashVideo> vid,
+		ArrayList<HashEndpoint> ends) {
 
-        for (int i=0; i<req.size();i++){
-            if (req.get(i).getNumRequests()>average){
-                if ((cach.get(currentCache).size - cach.get(currentCache).fullness) > req.get(i).getVid().getSize() ){
-                    cach.get(currentCache);
-                }
-            }
-        }
-
+		caches = cach;
+		requests = req;
+		videos = vid;
+		endpoints = ends;
 
     }
+
+	public ArrayList<HashCache> run() {
+
+		for (int i = 0; i < videos.size() ; i++) {
+			HashVideo thisVid = videos.get(i);
+			for (int j = 0; j < caches.size(); j++) {
+				HashCache thisCache = caches.get(j);
+				if(thisCache.getRemaining() >= thisVid.getSize()) {
+					thisCache.addVideo(thisVid);
+				}
+			}
+		}
+
+		return caches;
+	}
 
 }
