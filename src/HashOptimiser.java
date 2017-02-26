@@ -21,13 +21,16 @@ public class HashOptimiser {
 
 	public ArrayList<HashCache> run() {
 
-		for (int i = 0; i < videos.size() ; i++) {
-			HashVideo thisVid = videos.get(i);
-			for (int j = 0; j < caches.size(); j++) {
-				HashCache thisCache = caches.get(j);
-				if(thisCache.getRemaining() >= thisVid.getSize()) {
-					thisCache.addVideo(thisVid);
-				}
+		ArrayList<HashVideo> overflow = new ArrayList<>(500); // Videos which can't fit on first pass.
+
+		requests.sort(new HashRequest()); // requests sorted from most to least using custom comparator.
+
+		for(HashRequest r : requests) {
+			HashCache nearest = r.getSource().getNearestCache();
+			if(nearest.getRemaining() >= r.getVid().getSize()) {
+				nearest.addVideo(r.getVid());
+			} else {
+				overflow.add(r.getVid());
 			}
 		}
 

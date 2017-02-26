@@ -27,4 +27,17 @@ public class HashEndpoint {
 		}
 		return 100000000;
 	}
+
+	public HashCache getNearestCache() {
+		int minLatency = dcLatency;
+		HashCache nearCache = new HashCache(-1, -1);
+		for(HashCache c : caches) {
+			if(getCacheLatency(c) < minLatency){
+				minLatency = getCacheLatency(c);
+				nearCache = c;
+			}
+		}
+
+		return nearCache;
+	}
 }

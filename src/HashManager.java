@@ -5,7 +5,7 @@ public class HashManager {
 
 	public static void main(String[] args) throws IOException {
 
-		boolean WRITEMODE = false;
+		boolean WRITEMODE = true;
 		String[] FILENAMES = {"kittens", "me_at_the_zoo", "trending_today", "videos_worth_spreading"};
 		long sessionPoints = 0;
 
@@ -33,8 +33,8 @@ public class HashManager {
 
 			// Optimise caches.
 			HashOptimiser optimiser = new HashOptimiser(caches, requests, videos, endpoints);
+			System.out.println("Optimising...");
 			caches = optimiser.run();
-			System.out.println("Optimisation complete.");
 
 			// Calculate Score.
 			HashScorer scorer = new HashScorer(caches, requests, videos, endpoints);

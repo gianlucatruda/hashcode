@@ -13,8 +13,10 @@ public class HashCache {
     }
 
 	public void addVideo(HashVideo v) {
-		videos.add(v);
-		remaining -= v.getSize();
+		if(!containsVid(v)) {
+			videos.add(v);
+			remaining -= v.getSize();
+		}
 	}
 
 	public int getRemaining() { return remaining; }
