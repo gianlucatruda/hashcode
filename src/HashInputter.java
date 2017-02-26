@@ -15,6 +15,8 @@ public class HashInputter {
     int endpointsProcessed = 0;
     int currentCache = 0;
     boolean isComplete = false;
+	int totalLines = 0;
+	int currentLine;
 
     ArrayList<HashVideo> videos = new ArrayList<>(num_videos);
     ArrayList<HashCache> caches = new ArrayList<>(num_caches);
@@ -24,12 +26,27 @@ public class HashInputter {
     public HashInputter(String textfile){
         this.textfile = textfile;
 
+		// Code to count lines and log progress.
+		try {
+			Scanner scanner = new Scanner(new File(textfile));
+			while(scanner.hasNext()) {
+				String line = scanner.nextLine();
+				totalLines++;
+			}
+			System.out.println("File of "+totalLines+" lines.");
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
         try {
             // scanner for the whole textfile
             Scanner scanner = new Scanner(new File(textfile));
 
             // process the first line in format of "V E R C X"
-            String line = scanner.nextLine();
+			System.out.println("Processing line 1.");
+			String line = scanner.nextLine();
+
             String[] lineArr = line.split(" ");
             num_videos = Integer.parseInt(lineArr[0]);
             num_endpoints = Integer.parseInt(lineArr[1]);
@@ -41,16 +58,19 @@ public class HashInputter {
             // each number represents the size of the video
             line = scanner.nextLine();
             lineArr = line.split(" ");
-            for (int i=0; i<lineArr.length; i++){
+			System.out.println("Processing "+num_videos+" videos.");
+			for (int i=0; i<lineArr.length; i++){
                 HashVideo video = new HashVideo(i, Integer.valueOf(lineArr[i]));
                 videos.add(video);
             }
 
             // creates the caches
+			System.out.println("Processing "+num_caches+" caches.");
             for (int i=0; i<num_caches;i++){
                 caches.add(new HashCache(i, cache_capacity));
             }
             // process the endpoint line and then the corresponding cache lines
+			System.out.println("Processing "+num_endpoints+" endpoints.");
             for (int i=0; i<num_endpoints; i++){
                 line = scanner.nextLine();
                 lineArr = line.split(" ");
@@ -69,6 +89,7 @@ public class HashInputter {
             }
 
             // process the requests with format "Rv Re Rn"
+			System.out.println("Processing "+num_requests+" requests.");
             for (int i=0; i<num_requests; i++){
                 line = scanner.nextLine();
                 lineArr = line.split(" ");
