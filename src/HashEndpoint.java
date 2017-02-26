@@ -18,4 +18,13 @@ public class HashEndpoint {
     public int getDcLatency() {
         return dcLatency;
     }
+
+	public int getCacheLatency(HashCache cache) {
+		for(HashCache c : caches) {
+			if(c.ID == cache.ID) {
+				return cacheLatencies.get(caches.indexOf(c));
+			}
+		}
+		return 100000000;
+	}
 }

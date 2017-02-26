@@ -20,4 +20,5 @@ public class HashRequest {
     public HashVideo getVid() {
         return vid;
     }
+
 }

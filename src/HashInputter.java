@@ -44,7 +44,6 @@ public class HashInputter {
             Scanner scanner = new Scanner(new File(textfile));
 
             // process the first line in format of "V E R C X"
-			System.out.println("Processing line 1.");
 			String line = scanner.nextLine();
 
             String[] lineArr = line.split(" ");

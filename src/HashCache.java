@@ -22,4 +22,12 @@ public class HashCache {
     public ArrayList<HashVideo> getVideos() {
         return videos;
     }
+
+	public boolean containsVid(HashVideo v) {
+		for (int i = 0; i < videos.size() ; i++) {
+			if (videos.get(i).getID() == v.getID())
+				return true;
+		}
+		return false;
+	}
 }
