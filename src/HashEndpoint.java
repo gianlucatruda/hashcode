@@ -19,6 +19,14 @@ public class HashEndpoint {
         return dcLatency;
     }
 
+	public HashCache getCacheById(int id) {
+		for (HashCache c : caches) {
+			if(c.ID == id) {
+				return c;
+			}
+		} return null;
+	}
+
 	public int getCacheLatency(HashCache cache) {
 		for(HashCache c : caches) {
 			if(c.ID == cache.ID) {
@@ -39,5 +47,19 @@ public class HashEndpoint {
 		}
 
 		return nearCache;
+	}
+
+	public ArrayList<HashCache> getCachesByProximity() {
+		ArrayList<HashNode> myNodes = new ArrayList<>();
+		for(HashCache c : caches) {
+			myNodes.add(new HashNode(cacheLatencies.get(caches.indexOf(c)), c.ID));
+		}
+		myNodes.sort(new HashNode()); // Sorted from smallest to largest latency.
+		ArrayList<HashCache> outCache = new ArrayList<>();
+		for(HashNode n : myNodes) {
+			outCache.add(getCacheById(n.cacheID));
+		}
+		return outCache;
+
 	}
 }

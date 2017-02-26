@@ -6,7 +6,7 @@ public class HashManager {
 	public static void main(String[] args) throws IOException {
 
 		boolean WRITEMODE = true;
-		String[] FILENAMES = {"kittens", "me_at_the_zoo", "trending_today", "videos_worth_spreading"};
+		String[] FILENAMES = {"me_at_the_zoo", "trending_today", "videos_worth_spreading", "kittens"};
 		long sessionPoints = 0;
 
 		for (int i = 0; i<FILENAMES.length; i++) {

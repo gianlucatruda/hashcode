@@ -26,10 +26,6 @@ public class HashCache {
     }
 
 	public boolean containsVid(HashVideo v) {
-		for (int i = 0; i < videos.size() ; i++) {
-			if (videos.get(i).getID() == v.getID())
-				return true;
-		}
-		return false;
+		return videos.contains(v);
 	}
 }

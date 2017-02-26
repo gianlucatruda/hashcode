@@ -20,17 +20,15 @@ public class HashOptimiser {
     }
 
 	public ArrayList<HashCache> run() {
-
-		ArrayList<HashVideo> overflow = new ArrayList<>(500); // Videos which can't fit on first pass.
-
 		requests.sort(new HashRequest()); // requests sorted from most to least using custom comparator.
 
-		for(HashRequest r : requests) {
-			HashCache nearest = r.getSource().getNearestCache();
-			if(nearest.getRemaining() >= r.getVid().getSize()) {
-				nearest.addVideo(r.getVid());
-			} else {
-				overflow.add(r.getVid());
+		for(HashRequest r : requests) { // Loops through every request (bundle).
+			for (int i = 0; i < r.getSource().caches.size(); i++) { // Loops through every cache.
+				HashCache nearest = r.getSource().getCachesByProximity().get(i); // Gets the next nearest cache.
+				if(nearest.getRemaining() >= r.getVid().getSize()) { // If not full, adds the video to the cache.
+					nearest.addVideo(r.getVid());
+					break;
+				}
 			}
 		}
 
